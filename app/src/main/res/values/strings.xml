@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Outline X</string>
+
+    <string name="dynamic_theme_key">dynamic_theme</string>
+    <string name="dark_theme_key">dark_theme</string>
+    <string name="accent_key">accent</string>
+    <string name="toolbar_key">toolbar</string>
+    <string name="background_key">background_main</string>
+    <string name="palette_key">color_palette</string>
+</resources>
