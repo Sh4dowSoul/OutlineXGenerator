@@ -45,6 +45,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     SwitchPreferenceCompat dynamicThemeSwitch;
     SharedPreferences sp;
     PreferenceCategory appColorsCategory;
+    ListPreference backgroundPreference;
 
     String fileName = "";
     private static final int STORAGE_REQUEST = 1;
@@ -75,6 +76,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         PackageManager pm = getContext().getPackageManager();
         boolean supportedThemesInstalled = Util.isPackageInstalled("com.schnettler.outline", pm) | Util.isPackageInstalled("com.schnettler.ethereal", pm);
         dynamicThemeSwitch.setEnabled(dynamicThemeSwitch.isChecked() ? true : supportedThemesInstalled);
+        backgroundPreference = (ListPreference) findPreference(getContext().getResources().getString(R.string.background_key));
         if (supportedThemesInstalled | dynamicThemeSwitch.isChecked()){
             //Add Depency
             appColorsCategory.setDependency(getContext().getResources().getString(R.string.dynamic_theme_key));
@@ -248,6 +250,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         listPreferenceBackground.getIcon().setTint(Color.parseColor(currentTheme.getBackgroundMain()));
         listPreferencePalette.getIcon().setTint(Color.parseColor(currentTheme.getBlue()));
         listPreferenceAccent.getIcon().setTint(Color.parseColor(currentTheme.getAccentMain()));
+        backgroundPreference.setEnabled(!currentTheme.isDynamic());
 
         int selected = listPreferenceAccent.findIndexOfValue(listPreferenceAccent.getValue());
         switch (currentTheme.getBlue()) {
